@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Street Fighter Quiz Game</title>
+  <style>
+    #game {
+      width: 100%;
+      height: 30px;
+      position: relative;
+      display: flex;
+      flex-direction: row;
+    }
+    #game span {
+    display: flex;
+      flex-direction: row;
+    }
+    #player {
+      width: 400px;
+      height: 30px;
+      background-color: red;
+      position: absolute;
+      display: flex;
+      top: 50px;
+      bottom: 0;
+      left: 0;
+    }
+    #opponent {
+      width: 400px;
+      height: 30px;
+      background-color: blue;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+    #question {
+      margin-top: 20px;
+    }
+    * {
+margin: 0;
+padding: 0;
+}
+
+body{
+background-color: #D7E6EB;
+font-family: monospace;
+}
+header h1{
+text-align: center;
+font-size: 30px;
+}
+
+
+table {
+    border: 1px #1F618D solid;
+    font-size:25px; 
+    margin-left: 130px;
+    margin: auto;
+}
+
+
+tr {
+    border: 1px #1F618D solid;
+}
+
+td {
+    border: 1px #1F618D solid;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    vertical-align: center;
+}
+
+button{
+    border: 0px;
+    background-color: #EC7063;
+    color: #ffffff;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 20px;
+}
+
+.container{
+    width: 1100px;
+    margin: auto;
+}
+
+#div_game{
+    background-color: #ffffff;
+    margin: auto;
+    
+    width: 800px;
+    height: 800px;
+}
+
+#div_questions{
+background-color:#85C1E9;
+width: 700px;
+margin: auto;
+}
+
+.button{
+    margin: auto;
+    display: inline-block;
+}
+
+#button_verify{
+    width: 100px;
+    margin: auto;
+}
+#input_answer{
+    width: 100px;
+    margin: auto;
+}
+
+.deadCell{
+    background-color: #1F618D;
+}
+.availableCell{
+    background-color: #ffffff;
+}
+
+footer{
+    height: 80px;
+    background-color: #2C3E50;
+    color: #ffffff;
+    font-size: 15px; 
+    margin-bottom: 0;
+    padding: 0;
+    bottom: 0;
+}
+footer p{
+    text-align: center;
+
+}
+#div_information{
+    width: 500px;
+    margin: auto;
+    background-color: #85C1E9;
+    font-size: 20px;
+}
+
+
+#div_verifiedAnswer{
+    width: 500px;
+    height: 70px;
+    margin: auto;
+    text-align: center;
+    font-size: 20px;
+    vertical-align:center;
+    margin-bottom: 20px;
+}
+.correctAnswer{
+    background-color: #58D68D;
+    color: #196F3D;
+    border:1px #196F3D solid;
+}
+.wrongAnswer{
+    background-color: #EC7063  ;
+    color: #7B241C;
+    border:1px #7B241C solid;
+
+}
+  </style>
+</head>
+<body>
+  <div id="game">
+    <span>Health:</span>
+    <div id="player"></div>
+  </div>
+  <div id="game">
+     <span>Health:</span>
+    <div id="opponent"></div>
+</div>
+
+<div class="container">
+  <div style="display: none" id="div_verifiedAnswer">
+      <h3>Resposta Correta</h3>
+  </div>
+  <div id="div_game">
+      <div style="display: none" id="div_questions">
+          <center>
+              <span id="span_questionText">Vamos encontrar as esferas do dragao</span>
+              <input type="text" id="input_answer" placeholder="Sua Reposta"><br>
+              <button id="button_verify" onclick="verify()" class="button">Verificar</button>
+          </center>
+
+
+      </div>
+  </div>
+</div>
+
+  <div id="question">
+    <h2>Answer the following question:</h2>
+    <p id="questionText"></p>
+    <input type="text" id="answerInput">
+    <button onclick="checkAnswer()">Submit</button>
+  </div>
+
+
+
+  <script src="game.js"></script>
+</body>
+</html>
+<script>
+    var questions = [
+  {
+    question: "What is the capital of France?",
+    answer: "Paris"
+  },
+  {
+    question: "What is the largest planet in our solar system?",
+    answer: "Jupiter"
+  },
+  {
+    question: "Which animal is known as the 'king of the jungle'?",
+    answer: "Lion"
+  }
+];
+
+var currentPlayerHealth = 300;
+var currentOpponentHealth = 300;
+var currentPlayerTurn = true;
+var currentQuestionIndex = 0;
+
+var player = document.getElementById('player');
+var opponent = document.getElementById('opponent');
+var questionText = document.getElementById('questionText');
+var answerInput = document.getElementById('answerInput');
+
+renderQuestion();
+
+function renderQuestion() {
+  questionText.textContent = questions[currentQuestionIndex].question;
+  answerInput.value = "";
+  answerInput.focus();
+}
+
+function checkAnswer() {
+  var playerAnswer = answerInput.value;
+  var correctAnswer = questions[currentQuestionIndex].answer;
+
+  if (playerAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+    if (currentPlayerTurn) {
+      currentOpponentHealth -= 10;
+      opponent.style.width = currentOpponentHealth + 'px';
+    } else {
+      currentPlayerHealth -= 10;
+      player.style.width = currentPlayerHealth + 'px';
+    }
+  } else {
+    if (!currentPlayerTurn) {
+      currentPlayerHealth -= 10;
+      player.style.width = currentPlayerHealth + 'px';
+    } else {
+      currentOpponentHealth -= 10;
+      opponent.style.width = currentOpponentHealth + 'px';
+    }
+  }
+
+  if (currentPlayerHealth <= 0) {
+    alert("Game Over! You Lose.");
+    resetGame();
+  } else if (currentOpponentHealth <= 0) {
+    alert("Congratulations! You Win!");
+    resetGame();
+  } else {
+    currentPlayerTurn = !currentPlayerTurn;
+    currentQuestionIndex = (currentQuestionIndex + 1) % questions.length;
+    renderQuestion();
+  }
+}
+
+function resetGame() {
+  currentPlayerHealth = 300; 
+  currentOpponentHealth = 300;
+  currentPlayerTurn = true;
+  currentQuestionIndex = 0; 
+  player.style.width = currentPlayerHealth + 'px';
+  opponent.style.width = currentOpponentHealth + 'px';
+  renderQuestion();
+  }
+</script>
