@@ -23,7 +23,7 @@
 }
 .banner {
     width: 90%;
-    height: 700px;
+    height: 750px;
     margin-left: 100px;
     display: flex;
     flex-direction: column;
@@ -73,41 +73,45 @@
 }
 
 .row_of_topics {
+    background-color: #0000007e;
+    height: 600px;
     color: #ffffff;
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
     align-items: center;
-    margin-top: 20px;
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #0b0b0b, 0 0 20px #000000, 0 0 25px #0a0a0a, 0 0 30px #000000;
 }
 
 .row_of_topics span {
     font-size: 30px;
     color: #ffffff;
 }
-
-.box1 input {
+.radio_persona{
     margin-left: 40px;
-    margin-right: 10px;
-    margin-top: 5px;
 }
-
 .fotos1 {
     margin-top: 30px;
     margin-bottom: 50px;
 }
-
 .box1 {
-    font-size: 20px;
-    margin-bottom: 60px;
+    font-size: 25px;
+    margin-bottom: 40px;
     color: #ffffff;
     display: flex;
     flex-direction: row;
     justify-content: center;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
+.box1 p {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 25px;
+    margin-left: 10px;
+    text-align: left;
+    font-weight: 200px;
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #0b0b0b, 0 0 20px #000000, 0 0 25px #0a0a0a, 0 0 30px #000000;
+}
 .box_final {
     color: #ffffff;
     display: flex;
@@ -133,7 +137,7 @@
 }
 
 .btns button {
-    width: 180px;
+    width: 300px;
     height: 50px;
     background-color: transparent;
     border: 1px solid #ffffff;
@@ -145,7 +149,7 @@
     font-size: 30px ;
 }
 footer {
-    background-color: rgb(0, 0, 0);
+    background-color: transparent;
     color: #ffffff;
     font-size: 14px;
     bottom: 0;
