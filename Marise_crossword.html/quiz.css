@@ -6,6 +6,8 @@
   .header1 a {
     text-decoration: none;
     color: #fff;
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #0073e6, 0 0 20px #0073e6, 0 0 25px #0073e6, 0 0 30px #0073e6, 0 0 35px #0073e6;
+    font-size: 30px ;
   }
   .juntos {
     display: flex;
@@ -66,6 +68,8 @@
 #title {
     margin-top: 40px;
     margin-bottom: 50px;
+    color: #ffffff;
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #0073e6, 0 0 20px #0073e6, 0 0 25px #0073e6, 0 0 30px #0073e6;
 }
 
 .row_of_topics {
@@ -75,6 +79,7 @@
     justify-content: center;
     text-align: center;
     align-items: center;
+    margin-top: 20px;
 }
 
 .row_of_topics span {
@@ -83,8 +88,9 @@
 }
 
 .box1 input {
-    margin-left: 30px;
-    margin-bottom: 50px;
+    margin-left: 40px;
+    margin-right: 10px;
+    margin-top: 5px;
 }
 
 .fotos1 {
@@ -93,10 +99,13 @@
 }
 
 .box1 {
+    font-size: 20px;
+    margin-bottom: 60px;
     color: #ffffff;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .box_final {
@@ -108,7 +117,10 @@
     width: 100%;
     height: 300px;
 }
-
+.div_1{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 25px;
+}
 .pp {
     color: #ffffff;
 }
@@ -121,14 +133,16 @@
 }
 
 .btns button {
-    width: 130px;
-    height: 40px;
+    width: 180px;
+    height: 50px;
     background-color: transparent;
     border: 1px solid #ffffff;
     border-radius: 30px;
     color: #ffffff;
     cursor: pointer;
-    font-size: 15px;
+    font-size: 20px;
+    box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #0073e6, 0 0 20px #0073e6, 0 0 25px #0073e6, 0 0 30px #0073e6, 0 0 35px #0073e6;
+    font-size: 30px ;
 }
 footer {
     background-color: rgb(0, 0, 0);
