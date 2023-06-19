@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style_2.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <!-- <link rel="shortcut icon" href="../assets/logo-army.png" type="image/x-icon"> -->
+    <!-- <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="../js/funcoes.js"></script> -->
+    <title>Time's Up</title>
+</head>
+
+<body>
+
+    <div class="header1">
+        <ul class="navbar">
+            <div class="juntos">
+                <li id="mid" class="mude">
+                    <a href="homepage.html#games" style="margin-top: 10px;">Games</a>
+                </li>
+                <li class="mude">
+                    <a href="homepage.html"><img
+                            src="https://icon-library.com/images/white-home-icon-png/white-home-icon-png-21.jpg" alt=""
+                            style="width: 50px; "></a>
+                </li>
+                <li id="mid2" class="mude">
+                    <a href="homepage.html#desenvolvedores">Contato</a>
+                </li>
+            </div>
+        </ul>
+    </div>
+    <div class="dash_quiz">
+        <h1 id="quizz1">Listagem de conhecimento em Arq Comp</h1>
+
+        <div class="quizz-listagem" id="listagem">
+            <h1>Liste o conhecimento que você consegue em 3 minutos</h1>
+            <div class="listagem">
+                <span id="timer_jogo" class="timer"><span id="minutos_contador">3</span>:<span
+                        id="segundos_contador">00</span></span>
+                <div id="acertos_lista" class="lista-acertos"></div>
+                <div id="mensagem_Erro" class="lista-acertos"></div>
+                <input type="text" id="musica" oninput="listagemMusica()" readonly
+                    placeholder=" Clique em Começar para poder inicializar o jogo">
+            </div>
+            <span class="botoes">
+                <button onclick="comecarTimer()">Comecar</button>
+                <button onclick="finalizar()">Finalizar</button>
+            </span>
+        </div>
+        <div class="quizz-listagem" id="tela_final">
+            <h1>Resultados</h1>
+            <img src="../assets/banner-quizz-musica.png">
+            <div class="listagem">
+                <div id="acertos_lista_final" class="lista-acertos"></div>
+                <h1>Você acertou <span id="num_acertos">0</span> de 18</h1>
+            </div>
+            <span class="botoes">
+                <button onclick="refazer()">Tentar Novamente</button>
+            </span>
+        </div>
+    </div>
+    <footer class="foot">
+        <p>
+            Copyright © KAGI <3 | Todos os direitos reservado.
+        </p>
+    </footer>
+
+</body>
+
+</html>
+<script>
+    tela_final.style.display = 'none';
+    var answer = ["CPU", "RAM", "ROM", "EPROM", "Flash", "Memória de Massa", "ULA", "Registradores", "DMA", "CS", "Chip Select", "Adress bus", "Data bus", "Dual core", "Quad Core", "Memória Cache", "Mémoria Secundaria.", "UC"]
+    var listaAcerto = []
+    var pontos = 0
+
+    function listagemMusica() {
+        var respostaUser = musica.value
+        if (answer.indexOf(respostaUser) > -1) {
+            if (listaAcerto.indexOf(respostaUser) > -1) {
+                mensagem_Erro.innerHTML = 'Música já listada'
+                musica.value = ``
+            } else {
+                listaAcerto.push(respostaUser)
+                pontos++
+                acertos_lista.innerHTML += `${respostaUser} | `
+                acertos_lista_final.innerHTML += `${respostaUser} | `
+                musica.value = ``
+                mensagem_Erro.innerHTML = ``
+            }
+        }
+    }
+    /*
+    var score = 0
+    */
+    var timerInt = 5;
+    var timerSen = 0;
+
+    function comecarTimer() {
+        document.getElementById("musica").readOnly = false;
+        document.getElementById("musica").placeholder = '';
+
+        interval = setInterval(function () {
+            // if (timerInt == 5 && timerSen == 0) {
+            //     timerSen = 59
+            //     timerInt = 4
+            //     minutos_contador.innerHTML = timerInt
+            //     segundos_contador.innerHTML = timerSen
+            // } if (timerInt == 4 && timerSen == 0) {
+            //     timerSen = 59
+            //     timerInt = 3
+            //     minutos_contador.innerHTML = timerInt
+            //     segundos_contador.innerHTML = timerSen
+            // } 
+            if (timerInt == 3 && timerSen == 0) {
+                timerSen = 59
+                timerInt = 2
+                minutos_contador.innerHTML = timerInt
+                segundos_contador.innerHTML = timerSen
+            } if (timerInt == 2 && timerSen == 0) {
+                timerSen = 59
+                timerInt = 1
+                minutos_contador.innerHTML = timerInt
+                segundos_contador.innerHTML = timerSen
+            } if (timerInt == 1 && timerSen == 0) {
+                timerSen = 59
+                timerInt = 0
+                minutos_contador.innerHTML = timerInt
+                segundos_contador.innerHTML = timerSen
+            }
+            if (timerInt == 0 && timerSen <= 10) {
+                timer_jogo.style.color = "red";
+            }
+            if (timerInt === 0 && timerSen === 0) {
+                timer_jogo.style.color = "#3F2D6F";
+                clearInterval(interval)
+                alert("Acabou o tempo!")
+                finalizar()
+            }
+            minutos_contador.innerHTML = timerInt
+            segundos_contador.innerHTML = timerSen
+            timerSen--
+        }, 1000)
+    }
+
+    function finalizar() {
+        document.getElementById("musica").readOnly = true;
+        document.getElementById("musica").placeholder = 'Clique em Começar para poder inicializar o jogo ';
+        listagem.style.display = 'none';
+        tela_final.style.display = 'flex';
+        num_acertos.innerHTML = pontos;
+        clearInterval(interval);
+        listaAcerto = []
+    }
+
+    function refazer() {
+        zerar()
+        listagem.style.display = 'flex';
+        tela_final.style.display = 'none';
+        acertos_lista.innerHTML = ``
+        acertos_lista_final.innerHTML = ``
+        minutos_contador.innerHTML = '3'
+        segundos_contador.innerHTML = '00'
+
+    }
+
+    function zerar() {
+        pontos = 0;
+        listaAcerto = []
+    }
+</script>
