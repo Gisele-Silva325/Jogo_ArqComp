@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style_4.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <!-- <link rel="shortcut icon" href="../assets/logo-army.png" type="image/x-icon"> -->
+    <!-- <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="../js/funcoes.js"></script> -->
+    <title>Fighter</title>
+</head>
+
+<body>
+
+    <div class="header1">
+        <ul class="navbar">
+            <div class="juntos">
+                <li id="mid" class="mude">
+                    <a href="homepage.html#games" style="margin-top: 10px;">Games</a>
+                </li>
+                <li class="mude">
+                    <a href="homepage.html"><img
+                            src="https://icon-library.com/images/white-home-icon-png/white-home-icon-png-21.jpg" alt=""
+                            style="width: 50px; "></a>
+                </li>
+                <li id="mid2" class="mude">
+                    <a href="homepage.html#desenvolvedores">Contato</a>
+                </li>
+            </div>
+        </ul>
+    </div>
+
+    <div class="questions">
+        <div class="container">
+            <div style="display: none" id="div_verifiedAnswer">
+                <h3>Resposta Correta</h3>
+            </div>
+            <div id="div_game">
+                <div style="display: none" id="div_questions">
+                    <center>
+                        <span id="span_questionText">Vamos encontrar as esferas do dragao</span>
+                        <input type="text" id="input_answer" placeholder="Sua Reposta"><br>
+                        <button id="button_verify" onclick="verify()" class="button">Verificar</button>
+                    </center>
+                </div>
+            </div>
+        </div>
+
+        <div id="question">
+            <h2>Answer the following question:</h2>
+            <p id="questionText"></p>
+            <input type="text" id="answerInput">
+            <button onclick="checkAnswer()">Submit</button>
+        </div>
+
+    </div>
+    <div class="dash_quiz">
+        <div class="game">
+            <div class="vidas">
+                <div id="game">
+                    <span>Health:</span>
+                    <div id="player"></div>
+                </div>
+                <div id="game">
+                    <span id="opponent-health">Health:</span>
+                    <div id="opponent"></div>
+                </div>
+            </div>
+            <div class="personas">
+                <img id="player_persona" src="sprites/playerIdle.gif" alt="player" width="200" height="200">
+                <img id="enemy_persona" src="sprites/enemyIdle.gif" alt="enemy" width="200" height="200">
+            </div>
+        </div>
+    </div>
+    <!-- <p id="questionText"></p>
+                <input type="text" id="answerInput">
+                <button onclick="checkAnswer()">Submit</button> -->
+
+
+
+    <footer class="foot">
+        <p>
+            Copyright © KAGI <3 | Todos os direitos reservado. </p>
+    </footer>
+
+</body>
+
+</html>
+<script>
+    var questions = [
+        {
+            question: "Qual é o componente que realiza todos os processos?",
+            answer: "CPU"
+        },
+        {
+            question: "Qual é o componente que realiza as operações matemáticas e validações lógicas?",
+            answer: "ULA"
+        },
+        {
+            question: "Quem que armazena as operações, validações lógicas e o resultado delas?",
+            answer: "Registradores"
+        },
+        {
+            question: "Memória volátil que armazena temporariamente as informações embutidas nele. ",
+            answer: "RAM"
+        },
+        {
+            question: "Memória não volátil na qual as informações embutidas nelas são gravadas pelo o fabricante e só é permitido a leitura desses dados.",
+            answer: "ROM"
+        },
+        {
+            question: "Chip de memoria não volatil que armazena dados à longo prazo permitindo que os dados persistam armazenados após o desligamento da energia",
+            answer: "EPROM"
+        },
+        {
+            question: "Memoria não volatil que armazena dados à longo prazo permitindo que sejam armazenados mesmo quando a maquina é desligada. ",
+            answer: "Memoria de Massa"
+        },
+        {
+            question: "Recurso que permite que os dispositivos de entrada e sáida possuam acesso à memoria RAM sem sobrecarregar o processador",
+            answer: "DMA"
+        },
+        {
+            question: "Uma entrada de controle de muitos circuitos integrados que ele permite ativar ou desativar o circuito.",
+            answer: "CS"
+        },
+        {
+            question: "É usada para transferir dados entre dispositivos identificados pelo endereço de hardware da memória física.",
+            answer: "Adress bus"
+        },
+        {
+            question: "Representa essa ligação de dados que conecta todos os participantes entre si através de um caminho de transmissão.",
+            answer: "Data bus"
+        },
+        {
+            question: "Processador da intel que teve inicio de fabricação em 2009",
+            answer: "I5"
+        },
+        {
+            question: "Processador da intel que teve inicio de fabricação em 2008",
+            answer: "I7"
+        },
+        {
+            question: "Nome do processador que possui dois nucleos que trabalham simultaneamente",
+            answer: "Dual Core"
+        },
+        {
+            question: "Nome do processador que possui quatro nucleos e trabalha com todos eles ao mesmo tempo permitindo executar varias funções simuntaniamente",
+            answer: "Dual Core"
+        }
+    ];
+
+    var currentPlayerHealth = 200;
+    var currentOpponentHealth = 200;
+    var currentPlayerTurn = true;
+    var currentQuestionIndex = 0;
+
+    var player = document.getElementById('player');
+    var opponent = document.getElementById('opponent');
+    var questionText = document.getElementById('questionText');
+    var answerInput = document.getElementById('answerInput');
+
+    renderQuestion();
+
+    function renderQuestion() {
+        questionText.textContent = questions[currentQuestionIndex].question;
+        answerInput.value = "";
+        answerInput.focus();
+    }
+
+    function checkAnswer() {
+        var playerAnswer = answerInput.value;
+        var correctAnswer = questions[currentQuestionIndex].answer;
+
+        if (playerAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+            if (currentPlayerTurn) {
+                currentOpponentHealth -= 37.5;
+                opponent.style.width = currentOpponentHealth + 'px';
+                animar_ataque()
+            } else {
+                currentPlayerHealth -= 37.5;
+                player.style.width = currentPlayerHealth + 'px';
+            }
+        } else {
+            if (!currentPlayerTurn) {
+                currentPlayerHealth -= 37.5;
+                player.style.width = currentPlayerHealth + 'px';
+            } else {
+                currentOpponentHealth -= 37.5;
+                opponent.style.width = currentOpponentHealth + 'px';
+                animar_ataque()
+            }
+        }
+
+        function animar_ataque() {
+                const intervalo_walk = setInterval(() => {
+                    var imagem_player = document.getElementById('player_persona')
+                    imagem_player.src = 'sprites/playerWalk.gif'
+                    for(var i = 0; i <= 10; i++){
+                        player_persona.style.marginRight += `${i}%`;
+                    }
+                }, 500)
+
+                const intervalo_attack = setInterval(() => {
+                    var imagem_player = document.getElementById('player_persona')
+                    imagem_player.src = 'sprites/playerAttack.gif'
+                }, 1000)
+
+                setTimeout(() => {
+                    var imagem_player = document.getElementById('player_persona')
+                    clearInterval(intervalo_walk)
+                    clearInterval(intervalo_attack)
+                    imagem_player.src = 'sprites/playerIdle.gif'
+                }, 1500);
+
+            }
+
+            if (currentPlayerHealth <= 0) {
+                alert("Game Over! You Lose.");
+                resetGame();
+            } else if (currentOpponentHealth <= 0) {
+                alert("Congratulations! You Win!");
+                resetGame();
+            } else {
+                currentPlayerTurn = !currentPlayerTurn;
+                currentQuestionIndex = (currentQuestionIndex + 1) % questions.length;
+                renderQuestion();
+            }
+        }
+
+        function resetGame() {
+            currentPlayerHealth = 200;
+            currentOpponentHealth = 200;
+            currentPlayerTurn = true;
+            currentQuestionIndex = 0;
+            player.style.width = currentPlayerHealth + 'px';
+            opponent.style.width = currentOpponentHealth + 'px';
+            renderQuestion();
+        }
+</script>

@@ -1,0 +1,175 @@
+/* Css Banner */
+body {
+  background-image: url(imgs/super.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 700px 700px;
+  display: flex;
+  flex-direction: column;
+}
+.header1 {
+  width: 100%;
+  height: 10vh;
+}
+.header1 a {
+  text-decoration: none;
+  color: #fff;
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #0073e6, 0 0 20px #0073e6,
+    0 0 25px #0073e6, 0 0 30px #0073e6, 0 0 35px #0073e6;
+  font-size: 30px;
+}
+.juntos {
+  display: flex;
+}
+.juntos li {
+  margin-left: 15px;
+}
+.agora {
+  font-weight: 800;
+}
+.div_1 {
+  display: none;
+}
+.dash_quiz {
+  width: 100%;
+  height: 600px;
+  background-color: rgba(0, 0, 0, 0.434);
+  margin-top: 70px;
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #0073e6, 0 0 20px #0073e6,
+    0 0 25px #0073e6, 0 0 30px #0073e6, 0 0 35px #0073e6;
+}
+.dash_quiz h1 {
+  margin-bottom: 45px;
+}
+#musica {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin-left: 10px;
+  margin-top: 50px;
+  width: 500px;
+  height: 30px;
+}
+#musica input {
+  margin-left: 10px;
+}
+.listagem {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.listagem span {
+  font-size: 50px;
+}
+.quizz-listagem {
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+}
+.botoes button {
+  width: 200px;
+  height: 50px;
+  background-color: transparent;
+  border: 1px solid #ffffff;
+  border-radius: 30px;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #0073e6, 0 0 20px #0073e6,
+    0 0 25px #0073e6, 0 0 30px #0073e6, 0 0 35px #0073e6;
+}
+@import url("https://fonts.cdnfonts.com/css/common-pixel");
+#game {
+  width: 100%;
+  height: 30px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+#game span {
+  display: flex;
+  flex-direction: row;
+  margin-right: 3%;
+  margin-left: 3%;
+}
+#player {
+  margin-left: 3%;
+  width: 200px;
+  height: 30px;
+  background-color: red;
+  /* position: absolute; */
+  display: flex;
+  /* top: 50px; */
+  bottom: 0;
+  left: 0;
+}
+#opponent-health {
+  display: flex;
+  align-self: flex-end;
+}
+#opponent {
+  margin-right: 3%;
+  display: flex;
+  align-self: flex-end;
+  width: 200px;
+  height: 30px;
+  background-color: blue;
+  /* position: absolute; */
+  /* top: 50px; */
+  bottom: 0;
+  right: 0;
+}
+#question {
+  margin-top: 20px;
+}
+.game {
+  box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #0073e6, 0 0 20px #0073e6, 0 0 25px #0073e6, 0 0 30px #0073e6, 0 0 35px #0073e6;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 400px;
+  display: flex;
+  /* background-color: #000000; */
+  opacity: rgba(0, 0, 0, .25);
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.vidas{
+    display: flex;
+    flex-direction: row;
+}
+
+.personas{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#player-persona{
+    display: flex;
+    align-self: flex-start;
+}
+
+#enemy-persona{
+    display: flex;
+    align-self: flex-end;
+}
+
+.questions{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3%;
+    color: white;
+    z-index: 999;
+}
+
+.questions .container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3%;
+}
