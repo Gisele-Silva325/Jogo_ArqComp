@@ -60,22 +60,25 @@
 
     </div>
     <div class="dash_quiz">
-        <div class="game">
+        <div class="game" id="game_card">
             <div class="vidas">
                 <div id="game">
-                    <span>Health:</span>
+                    <span>Player 1 health:</span>
                     <div id="player"></div>
                 </div>
                 <div id="game">
-                    <span id="opponent-health">Health:</span>
+                    <span id="opponent-health">Enemy health:</span>
                     <div id="opponent"></div>
                 </div>
             </div>
             <div class="personas">
-                <img id="player_persona" src="sprites/playerIdle.gif" alt="player" width="200" height="200">
-                <img id="enemy_persona" src="sprites/enemyIdle.gif" alt="enemy" width="200" height="200">
+                <img id="player_persona" src="sprites/playerIdle.gif" alt="player" width="300" height="300">
+                <img id="enemy_persona" src="sprites/enemyIdle.gif" alt="enemy" width="300" height="300">
             </div>
         </div>
+    </div>
+    <div class="dash_game_over" id="mensagem_final">
+
     </div>
     <!-- <p id="questionText"></p>
                 <input type="text" id="answerInput">
@@ -178,25 +181,25 @@
         var correctAnswer = questions[currentQuestionIndex].answer;
 
         if (playerAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
-            if (currentPlayerTurn) {
-                currentOpponentHealth -= 37.5;
-                opponent.style.width = currentOpponentHealth + 'px';
-                animar_ataque_p1()
-            } else {
-                currentPlayerHealth -= 37.5;
-                player.style.width = currentPlayerHealth + 'px';
-                animar_ataque_p2()
-            }
+            // if (currentPlayerTurn) {
+            currentOpponentHealth -= 37.5;
+            opponent.style.width = currentOpponentHealth + 'px';
+            animar_ataque_p1()
+            // } else {
+            //     currentPlayerHealth -= 37.5;
+            //     player.style.width = currentPlayerHealth + 'px';
+            //     animar_ataque_p2()
+            // }
         } else {
-            if (!currentPlayerTurn) {
-                currentPlayerHealth -= 37.5;
-                player.style.width = currentPlayerHealth + 'px';
-                animar_ataque_p2()
-            } else {
-                currentOpponentHealth -= 37.5;
-                opponent.style.width = currentOpponentHealth + 'px';
-                animar_ataque_p1()
-            }
+            // if (!currentPlayerTurn) {
+            currentPlayerHealth -= 37.5;
+            player.style.width = currentPlayerHealth + 'px';
+            animar_ataque_p2()
+            // } else {
+            // currentOpponentHealth -= 37.5;
+            // opponent.style.width = currentOpponentHealth + 'px';
+            // animar_ataque_p1()
+            // }
         }
 
         function animar_ataque_p1() {
@@ -257,43 +260,54 @@
             const fim_game = setInterval(() => {
                 var imagem_player = document.getElementById('player_persona')
                 imagem_player.src = 'sprites/playerDeath.gif'
-            }, 500)
+                mensagem_final.style.display = 'block'
+                mensagem_final.innerHTML = `<h1>GAME OVER! YOU LOSE.</h1>`
+            }, 2500)
 
             setTimeout(() => {
                 var imagem_player = document.getElementById('player_persona')
                 clearInterval(fim_game)
                 imagem_player.src = 'sprites/playerDeathLastFrame.png'
-                alert("Game Over! You Lose.");
-            }, 600);
-            resetGame();
+                // alert("Game Over! You Lose.");
+                resetGame();
+            }, 3500);
         } else if (currentOpponentHealth <= 0) {
             const fim_game = setInterval(() => {
                 var imagem_enemy = document.getElementById('enemy_persona')
                 imagem_enemy.src = 'sprites/enemyDeath.gif'
-            }, 500)
+                mensagem_final.style.display = 'block'
+                mensagem_final.innerHTML = `<h1>CONGRATULATIONS! YOU WIN!</h1>`
+            }, 2500)
 
             setTimeout(() => {
                 var imagem_enemy = document.getElementById('enemy_persona')
                 clearInterval(fim_game)
                 imagem_enemy.src = 'sprites/enemyDeathLastFrame.png'
-                alert("Congratulations! You Win!");
-            }, 600);
+                // alert("Congratulations! You Win!");
+                resetGame();
+            }, 3500);
 
-            resetGame();
         } else {
-            currentPlayerTurn = !currentPlayerTurn;
+            // currentPlayerTurn = !currentPlayerTurn;
             currentQuestionIndex = (currentQuestionIndex + 1) % questions.length;
             renderQuestion();
         }
     }
 
     function resetGame() {
+        var imagem_player = document.getElementById('player_persona')
+        imagem_player.src = 'sprites/playerIdle.gif'
+        var imagem_enemy = document.getElementById('enemy_persona')
+        imagem_enemy.src = 'sprites/enemyIdle.gif'
+        mensagem_final.style.display = 'none'
         currentPlayerHealth = 200;
         currentOpponentHealth = 200;
-        currentPlayerTurn = true;
+        // currentPlayerTurn = true;
         currentQuestionIndex = 0;
         player.style.width = currentPlayerHealth + 'px';
         opponent.style.width = currentOpponentHealth + 'px';
         renderQuestion();
     }
+
+    // SPRITES FROM LuizMelo ON itch.io
 </script>

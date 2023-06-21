@@ -54,7 +54,6 @@
         </div>
         <div class="quizz-listagem" id="tela_final">
             <h1>Resultados</h1>
-            <img src="../assets/banner-quizz-musica.png">
             <div class="listagem">
                 <div id="acertos_lista_final" class="lista-acertos"></div>
                 <h1>Você acertou <span id="num_acertos">0</span> de 18</h1>
@@ -75,12 +74,12 @@
 </html>
 <script>
     tela_final.style.display = 'none';
-    var answer = ["CPU", "RAM", "ROM", "EPROM", "Flash", "Memória de Massa", "ULA", "Registradores", "DMA", "CS", "Chip Select", "Adress bus", "Data bus", "Dual core", "Quad Core", "Memória Cache", "Mémoria Secundaria.", "UC"]
+    var answer = ["CPU", "RAM", "ROM", "EPROM", "FLASH", "MEMORIA DE MASSA", "ULA", "REGISTRADORES", "DMA", "CS", "CHIP SELECT", "ADRESS BUS", "DATA BUS", "DUAL CORE", "QUAD CORE", "MEMORIA CACHE", "MEMORIA SECUNDARIA", "UC"]
     var listaAcerto = []
     var pontos = 0
 
     function listagemMusica() {
-        var respostaUser = musica.value
+        var respostaUser = (musica.value).toUpperCase()
         if (answer.indexOf(respostaUser) > -1) {
             if (listaAcerto.indexOf(respostaUser) > -1) {
                 mensagem_Erro.innerHTML = 'Música já listada'
@@ -98,7 +97,7 @@
     /*
     var score = 0
     */
-    var timerInt = 5;
+    var timerInt = 3;
     var timerSen = 0;
 
     function comecarTimer() {
