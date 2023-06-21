@@ -181,65 +181,119 @@
             if (currentPlayerTurn) {
                 currentOpponentHealth -= 37.5;
                 opponent.style.width = currentOpponentHealth + 'px';
-                animar_ataque()
+                animar_ataque_p1()
             } else {
                 currentPlayerHealth -= 37.5;
                 player.style.width = currentPlayerHealth + 'px';
+                animar_ataque_p2()
             }
         } else {
             if (!currentPlayerTurn) {
                 currentPlayerHealth -= 37.5;
                 player.style.width = currentPlayerHealth + 'px';
+                animar_ataque_p2()
             } else {
                 currentOpponentHealth -= 37.5;
                 opponent.style.width = currentOpponentHealth + 'px';
-                animar_ataque()
+                animar_ataque_p1()
             }
         }
 
-        function animar_ataque() {
-                const intervalo_walk = setInterval(() => {
-                    var imagem_player = document.getElementById('player_persona')
-                    imagem_player.src = 'sprites/playerWalk.gif'
-                    for(var i = 0; i <= 10; i++){
-                        player_persona.style.marginRight += `${i}%`;
-                    }
-                }, 500)
+        function animar_ataque_p1() {
+            const intervalo_walk = setInterval(() => {
+                var imagem_player = document.getElementById('player_persona')
+                imagem_player.src = 'sprites/playerWalk.gif'
+            }, 500)
 
-                const intervalo_attack = setInterval(() => {
-                    var imagem_player = document.getElementById('player_persona')
-                    imagem_player.src = 'sprites/playerAttack.gif'
-                }, 1000)
+            const intervalo_attack = setInterval(() => {
+                var imagem_player = document.getElementById('player_persona')
+                imagem_player.src = 'sprites/playerAttack.gif'
+            }, 1000)
 
-                setTimeout(() => {
-                    var imagem_player = document.getElementById('player_persona')
-                    clearInterval(intervalo_walk)
-                    clearInterval(intervalo_attack)
-                    imagem_player.src = 'sprites/playerIdle.gif'
-                }, 1500);
+            const intervalo_dano = setInterval(() => {
+                var imagem_enemy = document.getElementById('enemy_persona')
+                imagem_enemy.src = 'sprites/enemyDamage.gif'
+            }, 1200)
 
-            }
+            setTimeout(() => {
+                var imagem_player = document.getElementById('player_persona')
+                var imagem_enemy = document.getElementById('enemy_persona')
+                clearInterval(intervalo_walk)
+                clearInterval(intervalo_attack)
+                clearInterval(intervalo_dano)
+                imagem_player.src = 'sprites/playerIdle.gif'
+                imagem_enemy.src = 'sprites/enemyIdle.gif'
+            }, 1500);
+        }
 
-            if (currentPlayerHealth <= 0) {
+        function animar_ataque_p2() {
+            const intervalo_walk = setInterval(() => {
+                var imagem_enemy = document.getElementById('enemy_persona')
+                imagem_enemy.src = 'sprites/enemyWalk.gif'
+            }, 500)
+
+            const intervalo_attack = setInterval(() => {
+                var imagem_enemy = document.getElementById('enemy_persona')
+                imagem_enemy.src = 'sprites/enemyAttack.gif'
+            }, 1000)
+
+            const intervalo_dano = setInterval(() => {
+                var imagem_player = document.getElementById('player_persona')
+                imagem_player.src = 'sprites/playerDamage.gif'
+            }, 1200)
+
+            setTimeout(() => {
+                var imagem_player = document.getElementById('player_persona')
+                var imagem_enemy = document.getElementById('enemy_persona')
+                clearInterval(intervalo_walk)
+                clearInterval(intervalo_attack)
+                clearInterval(intervalo_dano)
+                imagem_player.src = 'sprites/playerIdle.gif'
+                imagem_enemy.src = 'sprites/enemyIdle.gif'
+            }, 1500);
+        }
+
+        if (currentPlayerHealth <= 0) {
+            const fim_game = setInterval(() => {
+                var imagem_player = document.getElementById('player_persona')
+                imagem_player.src = 'sprites/playerDeath.gif'
+            }, 500)
+
+            setTimeout(() => {
+                var imagem_player = document.getElementById('player_persona')
+                clearInterval(fim_game)
+                imagem_player.src = 'sprites/playerDeathLastFrame.png'
                 alert("Game Over! You Lose.");
-                resetGame();
-            } else if (currentOpponentHealth <= 0) {
-                alert("Congratulations! You Win!");
-                resetGame();
-            } else {
-                currentPlayerTurn = !currentPlayerTurn;
-                currentQuestionIndex = (currentQuestionIndex + 1) % questions.length;
-                renderQuestion();
-            }
-        }
+            }, 600);
+            resetGame();
+        } else if (currentOpponentHealth <= 0) {
+            const fim_game = setInterval(() => {
+                var imagem_enemy = document.getElementById('enemy_persona')
+                imagem_enemy.src = 'sprites/enemyDeath.gif'
+            }, 500)
 
-        function resetGame() {
-            currentPlayerHealth = 200;
-            currentOpponentHealth = 200;
-            currentPlayerTurn = true;
-            currentQuestionIndex = 0;
-            player.style.width = currentPlayerHealth + 'px';
-            opponent.style.width = currentOpponentHealth + 'px';
+            setTimeout(() => {
+                var imagem_enemy = document.getElementById('enemy_persona')
+                clearInterval(fim_game)
+                imagem_enemy.src = 'sprites/enemyDeathLastFrame.png'
+                alert("Congratulations! You Win!");
+            }, 600);
+
+            resetGame();
+        } else {
+            currentPlayerTurn = !currentPlayerTurn;
+            currentQuestionIndex = (currentQuestionIndex + 1) % questions.length;
             renderQuestion();
         }
+    }
+
+    function resetGame() {
+        currentPlayerHealth = 200;
+        currentOpponentHealth = 200;
+        currentPlayerTurn = true;
+        currentQuestionIndex = 0;
+        player.style.width = currentPlayerHealth + 'px';
+        opponent.style.width = currentOpponentHealth + 'px';
+        renderQuestion();
+    }
 </script>
